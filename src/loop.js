@@ -1,8 +1,8 @@
 import { buildSystemPrompt } from "./prompt.js";
 import { toolDefinitions, executeTool } from "./tools.js";
 
-const LLM_BASE_URL = "https://opencode.ai/zen/v1";
-const LLM_MODEL = "hy3-free";
+const LLM_BASE_URL = "https://opencode.ai/zen/go/v1";
+const LLM_MODEL = "hy3";
 
 const LLM_TIMEOUT_MS = 20_000;
 const MAX_ROUNDS = 8;
