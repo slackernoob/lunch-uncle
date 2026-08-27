@@ -1,9 +1,8 @@
 import { buildSystemPrompt } from "./prompt.js";
 import { toolDefinitions, executeTool } from "./tools.js";
 
-// TODO: set the base URL and model for your OpenAI-compatible provider.
-const LLM_BASE_URL = "TODO";
-const LLM_MODEL = "TODO";
+const LLM_BASE_URL = "https://opencode.ai/zen/v1";
+const LLM_MODEL = "hy3-free";
 
 const LLM_TIMEOUT_MS = 20_000;
 const MAX_ROUNDS = 8;
@@ -18,7 +17,7 @@ const FOOD_WORDS = /\b(eat|lunch|food|makan|hungry|restaurant|hawker)\b/i;
  */
 export async function runLoop(history, message, env) {
   // If the Places key is missing, Uncle cannot search, so give a safe answer.
-  if (!env.GOOGLE_PLACES_API_KEY || FOOD_WORDS.test(message)) {
+  if (!env.GOOGLE_PLACES_API_KEY && FOOD_WORDS.test(message)) {
     return FALLBACK_REPLY;
   }
 
@@ -48,6 +47,8 @@ export async function runLoop(history, message, env) {
         content: result,
       });
     }
+
+    round++;
   }
 
   return "Uncle tried too many times already. Ask something simpler.";
